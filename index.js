@@ -1,4 +1,4 @@
-const { create, Client } = require('@open-wa/wa-automate')
+const { create, Client } = require('919439773280@open-wa/wa-automate')
 const figlet = require('figlet')
 const options = require('./utils/options')
 const { color, messageLog } = require('./utils')
@@ -20,15 +20,15 @@ const start = (aruga = new Client()) => {
     // ketika bot diinvite ke dalam group
     aruga.onAddedToGroup(async (chat) => {
 	const groups = await aruga.getAllGroups()
-	// kondisi ketika batas group bot telah tercapai,ubah di file settings/setting.json
-	if (groups.length > groupLimit) {
+	// kondisi ketika batas grouplimit telah tercapai,ubah di file settings/setting.json
+	if (groups.length > 50) {
 	await aruga.sendText(chat.id, `Sorry, the group on this Bot is full\nMax Group is: ${groupLimit}`).then(() => {
 	      aruga.leaveGroup(chat.id)
 	      aruga.deleteChat(chat.id)
 	  }) 
 	} else {
 	// kondisi ketika batas member group belum tercapai, ubah di file settings/setting.json
-	    if (chat.groupMetadata.participants.length < memberLimit) {
+	    if (chat.groupMetadata.participants.length < 5) {
 	    await aruga.sendText(chat.id, `Sorry, Bot comes out if the group members do not exceed ${memberLimit} people`).then(() => {
 	      aruga.leaveGroup(chat.id)
 	      aruga.deleteChat(chat.id)
